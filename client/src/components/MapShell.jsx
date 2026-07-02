@@ -4,17 +4,17 @@ import { useMapMovement } from '../hooks/useMapMovement.js';
 
 const TILE_URL = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
 
-// Marker color per category
+// Marker color per category — warm expedition palette matching the journal panel
 const CATEGORY_COLORS = {
-  museum: '#8B5CF6',
-  park: '#10B981',
-  landmark: '#F59E0B',
-  food: '#EF4444',
-  culture: '#EC4899',
-  nature: '#059669',
-  shopping: '#6366F1',
-  nightlife: '#7C3AED',
-  default: '#2563EB',
+  museum: '#9C6BB3',
+  park: '#5E8C5A',
+  landmark: '#D9A441',
+  food: '#C95B38',
+  culture: '#C26188',
+  nature: '#3E7C6B',
+  shopping: '#5B6FA8',
+  nightlife: '#7D5BA6',
+  default: '#D96F47',
 };
 
 export default function MapShell({
@@ -160,39 +160,41 @@ export default function MapShell({
       visual.style.cssText = `
         width: 32px; height: 32px;
         background: ${color};
-        border: 3px solid white;
+        border: 3px solid #F7F0E1;
         border-radius: 50%;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+        box-shadow: 0 2px 10px rgba(20,31,25,0.35);
         transition: transform 0.2s ease, box-shadow 0.2s ease;
         display: flex; align-items: center; justify-content: center;
+        animation-delay: ${idx * 90}ms;
       `;
-      visual.innerHTML = `<span style="color:white;font-size:13px;font-weight:700;">${idx + 1}</span>`;
+      visual.innerHTML = `<span style="color:#F7F0E1;font-size:13px;font-weight:700;font-family:'Albert Sans',sans-serif;">${idx + 1}</span>`;
       el.appendChild(visual);
 
       el.addEventListener('mouseenter', () => {
         visual.style.transform = 'scale(1.25)';
-        visual.style.boxShadow = '0 4px 16px rgba(0,0,0,0.3)';
+        visual.style.boxShadow = '0 4px 18px rgba(20,31,25,0.4)';
       });
       el.addEventListener('mouseleave', () => {
         visual.style.transform = 'scale(1)';
-        visual.style.boxShadow = '0 2px 8px rgba(0,0,0,0.25)';
+        visual.style.boxShadow = '0 2px 10px rgba(20,31,25,0.35)';
       });
 
       const marker = new maplibregl.Marker({ element: el })
         .setLngLat([place.lng, place.lat])
         .addTo(mapRef.current);
 
-      el.addEventListener('click', () => {
+      el.addEventListener('click', (event) => {
+        event.stopPropagation();
         onSelectPlace(place);
 
         if (popupRef.current) popupRef.current.remove();
         const popup = new maplibregl.Popup({ offset: 20, closeOnClick: true })
           .setLngLat([place.lng, place.lat])
           .setHTML(`
-            <div style="font-family:'Plus Jakarta Sans',sans-serif;">
-              <div style="font-weight:700;font-size:14px;margin-bottom:4px;">${place.name}</div>
-              <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.5px;color:${color};font-weight:600;margin-bottom:6px;">${place.category}</div>
-              <div style="font-size:13px;color:#4B5563;line-height:1.4;">${place.whyVisit}</div>
+            <div style="font-family:'Albert Sans',sans-serif;">
+              <div style="font-family:'Fraunces',Georgia,serif;font-style:italic;font-weight:600;font-size:15px;margin-bottom:4px;color:#2A241A;">${place.name}</div>
+              <div style="font-size:10px;text-transform:uppercase;letter-spacing:1.4px;color:${color};font-weight:700;margin-bottom:6px;">${place.category}</div>
+              <div style="font-size:12.5px;color:#5C5342;line-height:1.5;">${place.whyVisit}</div>
             </div>
           `)
           .addTo(mapRef.current);

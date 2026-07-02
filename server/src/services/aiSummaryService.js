@@ -1,5 +1,5 @@
 import { getSummaryCache, setSummaryCache } from './cacheService.js';
-import { generateJson } from './geminiService.js';
+import { generateJson } from './ai/index.js';
 import { geocodePlace } from './geocodingService.js';
 
 const PROMPT_VERSION = 'v1.0';

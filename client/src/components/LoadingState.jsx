@@ -2,17 +2,15 @@ import React from 'react';
 
 export default function LoadingState() {
   return (
-    <div className="px-5 py-6 animate-fade-in">
-      <div className="flex items-center gap-2.5 mb-6">
-        <div className="w-5 h-5 rounded-full border-2 border-accent/30 border-t-accent animate-spin" />
-        <p className="text-sm font-medium text-ink/70">Finding places worth checking out...</p>
+    <div className="px-6 py-7 animate-fade-in">
+      <div className="flex items-center gap-3 mb-7">
+        <div className="w-5 h-5 rounded-full border-2 border-terracotta/25 border-t-terracotta animate-spin" />
+        <p className="text-sm font-display italic text-ink/75">Charting this territory...</p>
       </div>
 
-      <div className="space-y-5">
-        {/* Header skeleton */}
-        <div className="skeleton h-6 w-3/4" />
+      <div className="space-y-6">
+        <div className="skeleton h-7 w-3/4" />
 
-        {/* History skeleton */}
         <div className="space-y-2">
           <div className="skeleton h-3 w-20" />
           <div className="skeleton h-3 w-full" />
@@ -20,15 +18,13 @@ export default function LoadingState() {
           <div className="skeleton h-3 w-4/6" />
         </div>
 
-        {/* Fun facts skeleton */}
         <div className="space-y-2">
           <div className="skeleton h-3 w-24" />
           <div className="skeleton h-3 w-full" />
           <div className="skeleton h-3 w-3/4" />
         </div>
 
-        {/* Places skeleton */}
-        <div className="space-y-2">
+        <div className="space-y-3">
           <div className="skeleton h-3 w-28" />
           {[1, 2, 3].map(i => (
             <div key={i} className="flex gap-3 items-start">

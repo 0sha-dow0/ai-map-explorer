@@ -218,14 +218,14 @@ export default function App() {
           onZoomChange={setMapZoom}
         />
         {zoomHint && (
-          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-surface/95 backdrop-blur-sm text-muted text-sm font-medium px-5 py-2.5 rounded-full shadow-card border border-border animate-fade-in">
+          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-paper/90 backdrop-blur-sm text-ink text-sm font-medium px-5 py-2.5 rounded-full shadow-card border border-line animate-fade-in">
             Zoom in a bit more to explore this area
           </div>
         )}
       </div>
 
       {/* Side panel — 30–35% on desktop, bottom sheet on mobile */}
-      <div className="lg:flex-1 lg:max-w-[420px] lg:min-w-[340px] h-[50vh] lg:h-full border-t lg:border-t-0 lg:border-l border-border bg-surface shadow-panel overflow-hidden">
+      <div className="lg:flex-1 lg:max-w-[440px] lg:min-w-[350px] h-[50vh] lg:h-full relative grain border-t lg:border-t-0 lg:border-l border-line bg-paper shadow-panel overflow-hidden">
         <SidePanel
           placeLabel={placeLabel}
           summary={summary}

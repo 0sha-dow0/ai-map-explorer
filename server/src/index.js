@@ -1,26 +1,20 @@
-import express from 'express';
-import cors from 'cors';
-import { searchRouter } from './routes/search.js';
-import { areaSummaryRouter } from './routes/areaSummary.js';
-import { tellMoreRouter } from './routes/tellMore.js';
-import { healthRouter } from './routes/health.js';
-import { requestLogger } from './middleware/logger.js';
 import { loadEnv } from './loadEnv.js';
+import { createApp } from './app.js';
+import { assertProviderConfigured } from './services/ai/index.js';
+
+const DEFAULT_PORT = 3001;
 
 loadEnv();
 
-const app = express();
-const PORT = process.env.PORT || 3001;
+try {
+  assertProviderConfigured(process.env);
+} catch (err) {
+  console.error(`AI provider configuration error: ${err.message}`);
+  process.exit(1);
+}
 
-app.use(cors({ origin: process.env.CLIENT_ORIGIN || 'http://localhost:5173' }));
-app.use(express.json());
-app.use(requestLogger);
-
-// Routes
-app.use('/api', healthRouter);
-app.use('/api', searchRouter);
-app.use('/api', areaSummaryRouter);
-app.use('/api', tellMoreRouter);
+const app = createApp();
+const PORT = process.env.PORT || DEFAULT_PORT;
 
 app.listen(PORT, () => {
   console.log(`\n  🗺️  AI Map Explorer API`);

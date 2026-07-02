@@ -1,24 +1,26 @@
 import React from 'react';
 
+function SectionLabel({ children }) {
+  return (
+    <div className="flex items-center gap-2.5 mb-2">
+      <span className="w-1.5 h-1.5 rounded-full bg-terracotta flex-shrink-0" />
+      <h3 className="text-[11px] font-bold uppercase tracking-caps text-moss">{children}</h3>
+      <div className="route-rule flex-1" />
+    </div>
+  );
+}
+
 export default function SummarySections({ history, funFacts }) {
   return (
-    <div className="px-5 space-y-4 animate-slide-up">
-      {/* History */}
+    <div className="px-6 space-y-5">
       <section>
-        <div className="flex items-center gap-2 mb-1.5">
-          <span className="text-base">📜</span>
-          <h3 className="text-xs font-bold uppercase tracking-wider text-muted">History</h3>
-        </div>
-        <p className="text-sm leading-relaxed text-ink/80">{history}</p>
+        <SectionLabel>History</SectionLabel>
+        <p className="text-[13.5px] leading-relaxed text-ink/85">{history}</p>
       </section>
 
-      {/* Fun Facts */}
       <section>
-        <div className="flex items-center gap-2 mb-1.5">
-          <span className="text-base">✨</span>
-          <h3 className="text-xs font-bold uppercase tracking-wider text-muted">Fun Facts</h3>
-        </div>
-        <p className="text-sm leading-relaxed text-ink/80">{funFacts}</p>
+        <SectionLabel>Fun Facts</SectionLabel>
+        <p className="text-[13.5px] leading-relaxed text-ink/85">{funFacts}</p>
       </section>
     </div>
   );

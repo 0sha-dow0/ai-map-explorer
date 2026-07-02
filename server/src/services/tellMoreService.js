@@ -1,5 +1,5 @@
 import { getTellMoreCache, setTellMoreCache } from './cacheService.js';
-import { generateJson } from './geminiService.js';
+import { generateJson } from './ai/index.js';
 
 /**
  * Generate a deeper follow-up for an area using existing summary context.
